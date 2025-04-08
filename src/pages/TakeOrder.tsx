@@ -1,148 +1,20 @@
+
 import { useState } from "react";
 import AuthLayout from "@/components/layout/AuthLayout";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
+import { CATEGORIES } from "@/data/categories";
+import { LAUNDRY_ITEMS, LaundryItem } from "@/data/laundryItems";
 
-// Types for laundry items
-type LaundryItem = {
-  id: string;
-  name: string;
-  price: number;
-  selected: boolean;
-  quantity: number;
-};
-
-// Laundry item categories
-const CATEGORIES = [{
-  id: "garments",
-  name: "Garments",
-  icon: "👕"
-}, {
-  id: "household",
-  name: "Household",
-  icon: "🏠"
-}, {
-  id: "shoes",
-  name: "Shoes",
-  icon: "👞"
-}, {
-  id: "others",
-  name: "Others",
-  icon: "📦"
-}];
-
-// Mock data for laundry items by category
-const LAUNDRY_ITEMS: Record<string, LaundryItem[]> = {
-  garments: [{
-    id: "tshirt",
-    name: "T-SHIRT",
-    price: 15,
-    selected: false,
-    quantity: 0
-  }, {
-    id: "shirt",
-    name: "SHIRT",
-    price: 20,
-    selected: false,
-    quantity: 0
-  }, {
-    id: "pant",
-    name: "PANT",
-    price: 25,
-    selected: false,
-    quantity: 0
-  }, {
-    id: "jeans1",
-    name: "JEANS",
-    price: 30,
-    selected: false,
-    quantity: 0
-  }, {
-    id: "jacket",
-    name: "JACKET",
-    price: 40,
-    selected: false,
-    quantity: 0
-  }, {
-    id: "sweatshirt",
-    name: "SWEATSHIRT",
-    price: 35,
-    selected: false,
-    quantity: 0
-  }, {
-    id: "jeans2",
-    name: "JEANS",
-    price: 30,
-    selected: false,
-    quantity: 0
-  }, {
-    id: "shorts",
-    name: "SHORTS",
-    price: 20,
-    selected: false,
-    quantity: 0
-  }, {
-    id: "blankets",
-    name: "BLANKETS",
-    price: 50,
-    selected: false,
-    quantity: 0
-  }],
-  household: [{
-    id: "bedsheet",
-    name: "BEDSHEET",
-    price: 40,
-    selected: false,
-    quantity: 0
-  }, {
-    id: "curtains",
-    name: "CURTAINS",
-    price: 60,
-    selected: false,
-    quantity: 0
-  }, {
-    id: "towels",
-    name: "TOWELS",
-    price: 25,
-    selected: false,
-    quantity: 0
-  }],
-  shoes: [{
-    id: "sneakers",
-    name: "SNEAKERS",
-    price: 70,
-    selected: false,
-    quantity: 0
-  }, {
-    id: "formal",
-    name: "FORMAL SHOES",
-    price: 80,
-    selected: false,
-    quantity: 0
-  }],
-  others: [{
-    id: "bag",
-    name: "BAG",
-    price: 90,
-    selected: false,
-    quantity: 0
-  }, {
-    id: "cap",
-    name: "CAP",
-    price: 15,
-    selected: false,
-    quantity: 0
-  }]
-};
 const TakeOrder = () => {
-  const [selectedCategory, setSelectedCategory] = useState("garments");
+  const [selectedCategory, setSelectedCategory] = useState("washing-dry-cleaning");
   const [items, setItems] = useState<Record<string, LaundryItem[]>>(LAUNDRY_ITEMS);
-  const {
-    toast
-  } = useToast();
+  const { toast } = useToast();
+
   const handleCategorySelect = (categoryId: string) => {
     setSelectedCategory(categoryId);
   };
+
   const toggleItemSelection = (itemId: string) => {
     setItems(prevItems => {
       const newItems = {
@@ -162,6 +34,7 @@ const TakeOrder = () => {
       return newItems;
     });
   };
+
   const updateQuantity = (itemId: string, amount: number) => {
     setItems(prevItems => {
       const newItems = {
@@ -184,6 +57,7 @@ const TakeOrder = () => {
       return newItems;
     });
   };
+
   const calculateTotal = () => {
     let total = 0;
     Object.values(items).forEach(categoryItems => {
@@ -195,8 +69,12 @@ const TakeOrder = () => {
     });
     return total;
   };
+
   const handleCreateOrder = () => {
-    const selectedItems = Object.values(items).flatMap(categoryItems => categoryItems.filter(item => item.selected && item.quantity > 0));
+    const selectedItems = Object.values(items).flatMap(categoryItems => 
+      categoryItems.filter(item => item.selected && item.quantity > 0)
+    );
+    
     if (selectedItems.length === 0) {
       toast({
         title: "No items selected",
@@ -215,13 +93,18 @@ const TakeOrder = () => {
     // Reset the form
     setItems(LAUNDRY_ITEMS);
   };
+
   return <AuthLayout>
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
         {/* Category sidebar */}
         <div className="bg-white rounded-lg shadow p-4 lg:col-span-1">
           <h2 className="font-bold text-lg mb-4 text-center">Categories</h2>
           <div className="space-y-2">
-            {CATEGORIES.map(category => <Button key={category.id} onClick={() => handleCategorySelect(category.id)} className="removeall the emojis\n">
+            {CATEGORIES.map(category => <Button 
+                key={category.id} 
+                onClick={() => handleCategorySelect(category.id)} 
+                className="w-full justify-start"
+              >
                 <span className="mr-2">{category.icon}</span>
                 {category.name}
               </Button>)}
@@ -231,7 +114,10 @@ const TakeOrder = () => {
         {/* Items grid */}
         <div className="bg-white rounded-lg shadow p-4 lg:col-span-3">
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
-            {items[selectedCategory].map(item => <div key={item.id} className={`border rounded-lg p-4 cursor-pointer ${item.selected ? "bg-laundry-blue text-white" : "bg-gray-50"}`}>
+            {items[selectedCategory].map(item => <div 
+                key={item.id} 
+                className={`border rounded-lg p-4 cursor-pointer ${item.selected ? "bg-laundry-blue text-white" : "bg-gray-50"}`}
+              >
                 <div className="text-center mb-2" onClick={() => toggleItemSelection(item.id)}>
                   <h3 className="font-semibold">{item.name}</h3>
                   <p className="text-sm">{`Rs. ${item.price}`}</p>
@@ -261,4 +147,5 @@ const TakeOrder = () => {
       </div>
     </AuthLayout>;
 };
+
 export default TakeOrder;
