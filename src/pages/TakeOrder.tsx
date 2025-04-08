@@ -1,8 +1,8 @@
-
 import { useState } from "react";
 import AuthLayout from "@/components/layout/AuthLayout";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
+import { Shirt, Tshirt } from "lucide-react";
 
 // Types for laundry items
 type LaundryItem = {
@@ -15,7 +15,7 @@ type LaundryItem = {
 
 // Laundry item categories
 const CATEGORIES = [
-  { id: "garments", name: "Garments", icon: "👕" },
+  { id: "washing-dry-cleaning", name: "Washing and Dry Cleaning", icon: "🧼" },
   { id: "household", name: "Household", icon: "🏠" },
   { id: "shoes", name: "Shoes", icon: "👞" },
   { id: "others", name: "Others", icon: "📦" },
@@ -23,7 +23,7 @@ const CATEGORIES = [
 
 // Mock data for laundry items by category
 const LAUNDRY_ITEMS: Record<string, LaundryItem[]> = {
-  garments: [
+  "washing-dry-cleaning": [
     { id: "tshirt", name: "T-SHIRT", price: 15, selected: false, quantity: 0 },
     { id: "shirt", name: "SHIRT", price: 20, selected: false, quantity: 0 },
     { id: "pant", name: "PANT", price: 25, selected: false, quantity: 0 },
@@ -50,7 +50,7 @@ const LAUNDRY_ITEMS: Record<string, LaundryItem[]> = {
 };
 
 const TakeOrder = () => {
-  const [selectedCategory, setSelectedCategory] = useState("garments");
+  const [selectedCategory, setSelectedCategory] = useState("washing-dry-cleaning");
   const [items, setItems] = useState<Record<string, LaundryItem[]>>(LAUNDRY_ITEMS);
   const { toast } = useToast();
 
