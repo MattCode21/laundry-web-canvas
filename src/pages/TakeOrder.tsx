@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import AuthLayout from "@/components/layout/AuthLayout";
 import { Button } from "@/components/ui/button";
@@ -105,7 +104,6 @@ const TakeOrder = () => {
                 onClick={() => handleCategorySelect(category.id)} 
                 className="w-full justify-start"
               >
-                <span className="mr-2">{category.icon}</span>
                 {category.name}
               </Button>)}
           </div>

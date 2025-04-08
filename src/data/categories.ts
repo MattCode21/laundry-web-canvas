@@ -3,24 +3,20 @@
 export type Category = {
   id: string;
   name: string;
-  icon: string;
+  icon?: string; // Making icon optional
 };
 
 // Laundry item categories
 export const CATEGORIES: Category[] = [{
   id: "washing-dry-cleaning",
-  name: "Washing and Dry Cleaning",
-  icon: "👕"
+  name: "Washing and Dry Cleaning"
 }, {
   id: "household",
-  name: "Household",
-  icon: "🏠"
+  name: "Household"
 }, {
   id: "shoes",
-  name: "Shoes",
-  icon: "👞"
+  name: "Shoes"
 }, {
   id: "others",
-  name: "Others",
-  icon: "📦"
+  name: "Others"
 }];
