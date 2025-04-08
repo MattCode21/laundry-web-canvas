@@ -8,15 +8,21 @@ export type Category = {
 
 // Laundry item categories
 export const CATEGORIES: Category[] = [{
-  id: "washing-dry-cleaning",
-  name: "Washing and Dry Cleaning"
+  id: "washing-drying",
+  name: "Washing & Drying"
 }, {
-  id: "household",
-  name: "Household"
+  id: "dry-cleaning",
+  name: "Dry Cleaning"
 }, {
-  id: "shoes",
-  name: "Shoes"
+  id: "stain-removal",
+  name: "Stain Removal"
 }, {
-  id: "others",
-  name: "Others"
+  id: "steam-press",
+  name: "Steam Press"
+}, {
+  id: "blanket-cleaning",
+  name: "Blanket Cleaning"
+}, {
+  id: "curtain-cleaning",
+  name: "Curtain Cleaning"
 }];

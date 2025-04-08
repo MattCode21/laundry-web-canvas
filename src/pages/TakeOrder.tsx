@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import AuthLayout from "@/components/layout/AuthLayout";
 import { Button } from "@/components/ui/button";
@@ -6,7 +7,7 @@ import { CATEGORIES } from "@/data/categories";
 import { LAUNDRY_ITEMS, LaundryItem } from "@/data/laundryItems";
 
 const TakeOrder = () => {
-  const [selectedCategory, setSelectedCategory] = useState("washing-dry-cleaning");
+  const [selectedCategory, setSelectedCategory] = useState("washing-drying");
   const [items, setItems] = useState<Record<string, LaundryItem[]>>(LAUNDRY_ITEMS);
   const { toast } = useToast();
 
@@ -102,7 +103,8 @@ const TakeOrder = () => {
             {CATEGORIES.map(category => <Button 
                 key={category.id} 
                 onClick={() => handleCategorySelect(category.id)} 
-                className="w-full justify-start"
+                className={`w-full justify-start ${selectedCategory === category.id ? 'bg-laundry-blue' : ''}`}
+                variant={selectedCategory === category.id ? 'default' : 'outline'}
               >
                 {category.name}
               </Button>)}
@@ -112,7 +114,7 @@ const TakeOrder = () => {
         {/* Items grid */}
         <div className="bg-white rounded-lg shadow p-4 lg:col-span-3">
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
-            {items[selectedCategory].map(item => <div 
+            {items[selectedCategory]?.map(item => <div 
                 key={item.id} 
                 className={`border rounded-lg p-4 cursor-pointer ${item.selected ? "bg-laundry-blue text-white" : "bg-gray-50"}`}
               >
