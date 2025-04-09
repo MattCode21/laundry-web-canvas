@@ -19,12 +19,12 @@ const Header = () => {
       case "/update-price-list":
         return "UPDATE PRICE LIST";
       case "/delivery-requests":
-        return "DELIVERY REQUESTS";
+        return "DELIVERY AND SCHEDULE REQUEST";
       case "/laundry-status":
         return "LAUNDRY STATUS";
       default:
         if (pathname.startsWith("/delivery-request/")) {
-          return "DELIVERY REQUESTS";
+          return "DELIVERY AND SCHEDULE REQUEST";
         } else if (pathname.startsWith("/bill/")) {
           const billId = pathname.split("/").pop();
           return `BILL NO #${billId}`;

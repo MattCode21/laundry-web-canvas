@@ -107,17 +107,12 @@ const Login = () => {
         </form>
         
         <div className="mt-6 text-center">
-          <Link 
-            to="/register"
-            className="inline-flex items-center text-sm text-laundry-blue hover:underline"
-          >
-            <img 
-              src="/lovable-uploads/cb422ac4-0ee2-47d0-a78d-e47492590f4e.png" 
-              alt="Sign up icon" 
-              className="w-4 h-4 mr-1" 
-            />
-            Sign with Google
-          </Link>
+          <p className="text-sm text-gray-600">
+            Don't have an account?{" "}
+            <Link to="/register" className="text-laundry-blue hover:underline">
+              Register here
+            </Link>
+          </p>
         </div>
       </div>
     </div>

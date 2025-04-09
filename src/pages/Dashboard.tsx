@@ -59,8 +59,8 @@ const Dashboard = () => {
             className="h-24 rounded-md bg-laundry-blue hover:bg-laundry-darkBlue flex flex-col justify-center items-center"
             onClick={() => navigate("/delivery-requests")}
           >
-            <span className="font-bold">DELIVERY</span>
-            <span className="font-bold">REQUESTS</span>
+            <span className="font-bold">DELIVERY AND</span>
+            <span className="font-bold">SCHEDULE REQUEST</span>
           </Button>
         </div>
       </div>
