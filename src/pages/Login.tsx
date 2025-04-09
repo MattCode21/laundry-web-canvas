@@ -1,6 +1,6 @@
 
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/context/AuthContext";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -105,15 +105,6 @@ const Login = () => {
             {isLoading ? "Signing in..." : "Login"}
           </Button>
         </form>
-        
-        <div className="mt-6 text-center">
-          <p className="text-sm text-gray-600">
-            Don't have an account?{" "}
-            <Link to="/register" className="text-laundry-blue hover:underline">
-              Register here
-            </Link>
-          </p>
-        </div>
       </div>
     </div>
   );

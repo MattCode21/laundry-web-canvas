@@ -12,7 +12,6 @@ interface User {
 interface AuthContextType {
   user: User | null;
   login: (username: string, password: string) => Promise<boolean>;
-  register: (username: string, password: string, name: string) => Promise<boolean>;
   logout: () => void;
   isAuthenticated: boolean;
 }
@@ -58,22 +57,13 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     return false;
   };
 
-  // Mock register function
-  const register = async (username: string, password: string, name: string): Promise<boolean> => {
-    // In a real app, this would be an API call
-    if (username && password && name) {
-      return true;
-    }
-    return false;
-  };
-
   const logout = () => {
     setUser(null);
     localStorage.removeItem("user");
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, register, logout, isAuthenticated }}>
+    <AuthContext.Provider value={{ user, login, logout, isAuthenticated }}>
       {children}
     </AuthContext.Provider>
   );
