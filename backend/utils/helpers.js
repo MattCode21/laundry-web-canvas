@@ -57,9 +57,27 @@ const formatDate = (date) => {
  */
 const generateRandomPassword = (length = 12) => {
   const charset = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()';
-  return Array.from(crypto.getRandomValues(new Uint32Array(length)))
-    .map((x) => charset[x % charset.length])
-    .join('');
+  // Use Node.js crypto module instead of browser crypto
+  const crypto = require('crypto');
+  let password = '';
+  for (let i = 0; i < length; i++) {
+    const randomIndex = crypto.randomInt(0, charset.length);
+    password += charset[randomIndex];
+  }
+  return password;
+};
+
+/**
+ * Parse JSON safely, returning null if parsing fails
+ * @param {string} jsonString JSON string to parse
+ * @returns {object|null} Parsed object or null
+ */
+const safeJSONParse = (jsonString) => {
+  try {
+    return JSON.parse(jsonString);
+  } catch (e) {
+    return null;
+  }
 };
 
 /**
@@ -87,5 +105,6 @@ module.exports = {
   calculateOrderTotal,
   formatDate,
   generateRandomPassword,
+  safeJSONParse,
   maskSensitiveInfo
 };
